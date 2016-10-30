@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>CodeSnippets</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag 'highlight', 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <h4 class="center">
+      <%= link_to "Home", root_path %> |
+      <%= link_to "View all snippets", snippets_path %> |
+      <% if logged_in? %>
+        <%= link_to "Create new snippet", new_snippet_path %> |
+        <%= link_to "Edit your profile", edit_user_path(current_user) %> |
+        <%= link_to "View your work", user_path(current_user) %> |
+        <%= link_to 'Log out', logout_path, method: :delete %>
+      <% else %>
+        <%= link_to 'Sign up', signup_path %> |
+        <%= link_to 'Log in', login_path %>
+      <% end %>
+    </h4>
+    <%= render 'layouts/messages'%>
+    <div class="container">
+      <%= yield %>
+    </div>
+  </body>
+</html>

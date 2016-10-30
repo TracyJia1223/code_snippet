@@ -1,0 +1,10 @@
+<h1 class="center">Code Snippets</h1>
+
+<hr>
+<br>
+<div class="center">
+  <% @kinds.each do |kind| %>
+    <h4><%= link_to "#{kind.language} : #{ pluralize(kind.count_for, 'snippet')}", language_path(kind.id) %></h4>
+    <br>
+  <% end %>
+</div>

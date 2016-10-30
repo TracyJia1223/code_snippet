@@ -1,0 +1,33 @@
+
+<div class="well col-xs-8 col-xs-offset-2">
+  <% if !@snippet.is_private? || (logged_in? && current_user == @snippet.user) %>
+    <h2 align="center">Title: <%= @snippet.title %></h2>
+    <% if @snippet.user %>
+    <!-- <ul class="listing"> -->
+      <div class="row center">
+        <div class="col-md-6 col-md-offset-3">
+          <h5>Created by: <%= link_to @snippet.user.username, user_path(@snippet.user) %> <%= @snippet.is_private?  ?  "| Private" : "| Public" %></h5>
+        </div>
+      </div>
+    <!-- </ul> -->
+  <% end %>
+    <h3 align="center">Language: <span class="language"><%= link_to @snippet.kind.language, language_path(@snippet.kind.id) %></span></h3>
+    <div class="post-actions">
+      <!-- <h4 class="center description"><strong>Work:</strong></h4> -->
+      <hr>
+      <%= markdown("```" + @snippet.kind.language + "\n" + @snippet.work + "\n```") %>
+      <%# block_code(@snippet.work, @sinppet.kind.language) %>
+      <div class="post-actions">
+        <% if logged_in? && current_user == @snippet.user %>
+          <%= link_to 'Edit', edit_snippet_path(@snippet), class: "btn btn-xs btn-primary" %>
+          <%= link_to 'Delete', snippet_path(@snippet),
+                            method: :delete,
+                            data: {confirm: 'Are you sure?'}, class: "btn btn-xs btn-danger" %>
+        <% end %>
+        <%= link_to 'View all', snippets_path, class: "btn btn-xs btn-success" %>
+      </div>
+    </div>
+  <% else %>
+    <h2 class="center">This snippet is private</h2>
+  <% end %>
+</div>

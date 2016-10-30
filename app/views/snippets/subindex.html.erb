@@ -1,0 +1,38 @@
+<h3 align="center">Writen by:<span class="language"> <%= @snippets.first.kind.language %></span></h3>
+<div class="center">
+  <%= will_paginate @snippets %>
+</div>
+<% @snippets.each do |s| %>
+  <% if !s.is_private? %>
+    <div class="well col-xs-8 col-xs-offset-2">
+      <div class="well well-lg">
+        <div class="post-title">
+          <%= link_to s.title, snippet_path(s) %>
+        </div>
+        <% if s.user %>
+        <!-- <ul class="listing"> -->
+          <div class="row center">
+            <div class="col-md-4 col-md-offset-4">
+              <h5>Created by: <%= link_to s.user.username, user_path(s.user) %></h5>
+            </div>
+          </div>
+        <!-- </ul> -->
+      <% end %>
+        <div class="post-body">
+          <%= markdown("```" + s.kind.language + "\n" + s.work + "\n```") %>
+        </div>
+        <% if logged_in? && current_user == s.user %>
+          <div class="post-actions">
+            <%= link_to 'Edit', edit_snippet_path(s), class: "btn btn-xs btn-primary" %>
+            <%= link_to 'Delete', snippet_path(s),
+                              method: :delete,
+                              data: {confirm: 'Are you sure?'}, class: "btn btn-xs btn-danger" %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+<% end %>
+<div class="center">
+  <%= will_paginate @snippets %>
+</div>
