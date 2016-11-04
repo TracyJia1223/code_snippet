@@ -8,7 +8,7 @@
     <%= will_paginate @snippets %>
   </div>
   <% @snippets.each do |s| %>
-    <% if !s.is_private? %>
+    <%# if !s.is_private? %>
       <div class="well col-xs-8 col-xs-offset-2">
         <div class="well well-lg">
           <div class="post-title">
@@ -37,7 +37,7 @@
           <% end %>
         </div>
       </div>
-    <% end %>
+    <%# end %>
   <% end %>
   <div class="center">
     <%= will_paginate @snippets %>

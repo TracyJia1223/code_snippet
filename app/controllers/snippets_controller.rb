@@ -28,8 +28,8 @@ class SnippetsController < ApplicationController
   end
 
   def subindex
-    kind = Kind.find params[:id]
-    @snippets = kind.snippets.order(created_at: :desc).paginate(page: params[:page], per_page: 5)
+    @kind = Kind.find params[:id]
+    @snippets = @kind.snippets.viewable(current_user).order(created_at: :desc).paginate(page: params[:page], per_page: 5)
   end
 
   def edit

@@ -22,14 +22,14 @@
         <div class="post-body">
           <%= markdown("```" + s.kind.language + "\n" + s.work + "\n```") %>
         </div>
-        <%# if logged_in? && current_user == p.user %>
+        <% if (logged_in? && current_user == s.user) %>
           <div class="post-actions">
             <%= link_to 'Edit', edit_snippet_path(s), class: "btn btn-xs btn-primary" %>
             <%= link_to 'Delete', snippet_path(s),
                               method: :delete,
                               data: {confirm: 'Are you sure?'}, class: "btn btn-xs btn-danger" %>
           </div>
-        <%# end %>
+        <% end %>
       </div>
     </div>
 <% end %>
